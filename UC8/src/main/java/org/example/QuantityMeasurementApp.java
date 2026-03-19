@@ -1,28 +1,26 @@
 package org.example;
 import java.util.Objects;
-
+enum LengthUnit {
+    FEET(1.0),
+    INCH(1.0 / 12.0),
+    YARD(3.0),
+    CM(1.0 / 30.48);
+    private final double conversionFactor;
+    LengthUnit(double conversionFactor) {
+        this.conversionFactor = conversionFactor;
+    }
+    double toBase(double value) {
+        return value * conversionFactor;
+    }
+    double fromBase(double baseValue) {
+        return baseValue / conversionFactor;
+    }
+}
 public class QuantityMeasurementApp {
-    static class Length {
+    static class Length{
         private final double value;
         private final LengthUnit unit;
         private static final double EPSILON = 1e-6;
-
-        public enum LengthUnit {
-            FEET(1.0),
-            INCH(1.0 / 12.0),
-            YARD(3.0),
-            CM(1.0 / 30.48);
-            private final double conversionFactor;
-            LengthUnit(double conversionFactor) {
-                this.conversionFactor = conversionFactor;
-            }
-            double toBase(double value) {
-                return value * conversionFactor;
-            }
-            double fromBase(double baseValue) {
-                return baseValue / conversionFactor;
-            }
-        }
         public Length(double value, LengthUnit unit) {
             if (unit == null) throw new IllegalArgumentException("Unit cannot be null");
             if (!Double.isFinite(value)) throw new IllegalArgumentException("Invalid value");
