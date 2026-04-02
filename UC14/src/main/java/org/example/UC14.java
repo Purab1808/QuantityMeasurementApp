@@ -178,7 +178,6 @@ class Quantity<U extends iMeasureable> {
     public int hashCode() {
         double baseValue=unit.toBaseUnit(value);
 
-        // 🔥 FIX: rounding for consistency
         long rounded=Math.round(baseValue * 100);
         return Objects.hash(rounded, unit.getClass());
     }
