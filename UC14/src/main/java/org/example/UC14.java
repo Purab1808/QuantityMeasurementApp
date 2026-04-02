@@ -172,7 +172,6 @@ class Quantity<U extends iMeasureable> {
         double v1=this.unit.toBaseUnit(this.value);
         double v2=a.unit.toBaseUnit(a.value);
 
-        // 🔥 FIX: better tolerance
         return Math.abs(v1 - v2) < 1e-2;
     }
 
